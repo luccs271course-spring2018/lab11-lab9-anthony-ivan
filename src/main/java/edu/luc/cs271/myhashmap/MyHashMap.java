@@ -44,52 +44,95 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public boolean containsKey(final Object key) {
-    // TODO follow basic approach of remove below (though this will be much simpler)
+    // TODO follow basic approach of remove below (though this will be much simpler)maybe done? 
     final int index = calculateIndex(key);
-
-
-    return false;
+    while((table[index] != null) && (!key.equals(table[index].getKey())))
+    {
+      index++; 
+      if(index > table.length)
+      {
+        index = 0; 
+      }
+    }
+      return index;
   }
 
   @Override
   public boolean containsValue(final Object value) {
-    // TODO follow basic approach of remove below (though this will be much simpler)
-
-
-    return false;
+    // TODO follow basic approach of remove below (though this will be much simpler) maybe done? 
+       final int index = calculateIndex(value);
+       while((table[index] != null) && (!value.equals(table[index].getvalue())))
+    {
+      index++; 
+      if(index > table.length)
+      {
+        index = 0; 
+      }
+    }
+      return index;
+  }
   }
 
   @Override
   public V get(final Object key) {
     // TODO follow basic approach of remove below (though this will be simpler)
-    final int index = calculateIndex(key);
-
-
+    int index = calculateIndex(key)
+    final Iterator<Entry<K,V>> iter = table.get(index).iterator();
+    while(iter.hasNext()){
+      final Entry<K,V>entry = iter.next();
+      if entry.getKey.equals(key);
+      return entry.getValue()''
+    }
+  
     return null;
   }
 
   @Override
   public V put(final K key, final V value) {
     // TODO follow basic approach of remove below (this will be similar)
-    final int index = calculateIndex(key);
-
-
-    return null;
+    //done
+      final int index = calculateIndex(key);
+      if(index < 0) 
+      {
+        index  += table.length;
+      }
+      if(table[index] == null)
+      {
+        table[index] == new LinkedList<>();
+      }
+      final Iterator<Entry<K,V>> iter = table.get(index).iterator();
+      while(iter.hasNext()){
+        final Entry<K,V> entry = iter.next();
+        if(entry.getkey().equals(key))
+        {
+          final V oldValue = entry.getValue();
+          entry.setValue(value);
+          return oldValue;
+        }
+      }
+      return null;
   }
 
   @Override
   public V remove(final Object key) {
+    //calculates index using hashcode % table.length
     final int index = calculateIndex(key);
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
     while (iter.hasNext()) {
       final Entry<K, V> entry = iter.next();
+      //key is found
       if (entry.getKey().equals(key)) {
         final V oldValue = entry.getValue();
+        //remove value of the key that was found
         iter.remove();
+        //return the value that was removed
         return oldValue;
+        
       }
     }
+    //key is not in table
     return null;
+  
   }
 
   @Override
