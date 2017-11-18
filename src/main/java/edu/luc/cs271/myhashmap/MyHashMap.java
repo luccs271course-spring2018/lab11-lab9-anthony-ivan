@@ -45,43 +45,25 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public boolean containsKey(final Object key) {
     // TODO follow basic approach of remove below (though this will be much simpler)maybe done? 
-    final int index = calculateIndex(key);
-    while((table[index] != null) && (!key.equals(table[index].getKey())))
-    {
-      index++; 
-      if(index > table.length)
-      {
-        index = 0; 
-      }
-    }
-      return index;
+    return (table.contains(key));
   }
 
   @Override
   public boolean containsValue(final Object value) {
     // TODO follow basic approach of remove below (though this will be much simpler) maybe done? 
-       final int index = calculateIndex(value);
-       while((table[index] != null) && (!value.equals(table[index].getvalue())))
-    {
-      index++; 
-      if(index > table.length)
-      {
-        index = 0; 
-      }
-    }
-      return index;
+    return (table.contains(value));
   }
-  }
+  
 
   @Override
   public V get(final Object key) {
     // TODO follow basic approach of remove below (though this will be simpler)
-    int index = calculateIndex(key)
+    int index = calculateIndex(key);
     final Iterator<Entry<K,V>> iter = table.get(index).iterator();
     while(iter.hasNext()){
-      final Entry<K,V>entry = iter.next();
-      if entry.getKey.equals(key);
-      return entry.getValue()''
+      final Entry<K,V> entry = iter.next();
+      if (entry.getKey().equals(key))
+      return entry.getValue();
     }
   
     return null;
@@ -91,19 +73,15 @@ public class MyHashMap<K, V> implements Map<K, V> {
   public V put(final K key, final V value) {
     // TODO follow basic approach of remove below (this will be similar)
     //done
-      final int index = calculateIndex(key);
-      if(index < 0) 
+       int index = calculateIndex(key);
+      if(table.get(index).equals(null))
       {
-        index  += table.length;
-      }
-      if(table[index] == null)
-      {
-        table[index] == new LinkedList<>();
+         table.add(index,new LinkedList<>());
       }
       final Iterator<Entry<K,V>> iter = table.get(index).iterator();
       while(iter.hasNext()){
         final Entry<K,V> entry = iter.next();
-        if(entry.getkey().equals(key))
+        if(entry.getKey().equals(key))
         {
           final V oldValue = entry.getValue();
           entry.setValue(value);
@@ -202,3 +180,4 @@ public class MyHashMap<K, V> implements Map<K, V> {
     return Math.floorMod(key.hashCode(), table.size());
   }
 }
+
