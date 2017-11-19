@@ -30,12 +30,13 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public int size() {
-    // TODO add the sizes of all the chains
-    int result = 0;
-
-
+     int result = 0;
+    for(int i = 0; i < table.size(); i++) {
+      result += table.get(i).size();
+    }
     return result;
   }
+  
 
   @Override
   public boolean isEmpty() {
@@ -44,19 +45,22 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public boolean containsKey(final Object key) {
-    // TODO follow basic approach of remove below (though this will be much simpler)maybe done? 
+    //DONE
+    // TODO follow basic approach of remove below (though this will be much simpler)
     return (table.contains(key));
   }
 
   @Override
   public boolean containsValue(final Object value) {
-    // TODO follow basic approach of remove below (though this will be much simpler) maybe done? 
+    //DONE
+    // TODO follow basic approach of remove below (though this will be much simpler) 
     return (table.contains(value));
   }
   
 
   @Override
   public V get(final Object key) {
+    //DONE
     // TODO follow basic approach of remove below (though this will be simpler)
     int index = calculateIndex(key);
     final Iterator<Entry<K,V>> iter = table.get(index).iterator();
@@ -72,7 +76,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public V put(final K key, final V value) {
     // TODO follow basic approach of remove below (this will be similar)
-    //done
+    //DONE
        int index = calculateIndex(key);
       if(table.get(index).equals(null))
       {
@@ -123,9 +127,19 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public void clear() {
     // TODO clear each chain
+  
+      final Iterator<Entry<K,V>> iter = table.get(size()).iterator(); 
+      while(iter.hasNext())
+      {
+        
+          final Entry<K,V> ommit = iter.next(); 
+          ommit.getKey(); 
+          remove(ommit);
+      }
+   }
 
 
-  }
+  
 
   /** The resulting keySet is not "backed" by the Map, so we keep it unmodifiable. */
   @Override
