@@ -145,8 +145,14 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public Set<K> keySet() {
     final Set<K> result = new HashSet<>();
+      final Iterator<Entry<K,V>> iter = table.get(size()).iterator();
+      while(iter.hasNext())
+      {
+        final Entry<K,V> keys = iter.next(); 
+       final K getAllKeys = keys.getKey(); 
+        result.add(getAllKeys);
     // TODO populate the set
-
+      }
 
     return Collections.unmodifiableSet(result);
   }
