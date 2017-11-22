@@ -133,8 +133,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
       {
         
           final Entry<K,V> ommit = iter.next(); 
-          ommit.getKey(); 
-          remove(ommit);
+          final K deleteKey = ommit.getKey(); 
+          remove(deleteKey);
       }
    }
 
