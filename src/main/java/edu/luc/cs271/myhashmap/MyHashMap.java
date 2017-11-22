@@ -30,13 +30,18 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public int size() {
+<<<<<<< HEAD
     // TODO add the sizes of all the chains
     int result = 0;
+=======
+     int result = 0;
+>>>>>>> 88aa1c1fe6298457a05a9c14cdd9b458add3ccf3
     for(int i = 0; i < table.size(); i++) {
       result += table.get(i).size();
     }
     return result;
   }
+  
 
   @Override
   public boolean isEmpty() {
@@ -45,7 +50,9 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public boolean containsKey(final Object key) {
+    //DONE
     // TODO follow basic approach of remove below (though this will be much simpler)
+<<<<<<< HEAD
     final int index = calculateIndex(key);
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
     while (iter.hasNext()) {
@@ -55,10 +62,14 @@ public class MyHashMap<K, V> implements Map<K, V> {
       }
     }
     return false;
+=======
+    return (table.contains(key));
+>>>>>>> 88aa1c1fe6298457a05a9c14cdd9b458add3ccf3
   }
 
   @Override
   public boolean containsValue(final Object value) {
+<<<<<<< HEAD
     // TODO follow basic approach of remove below (though this will be much simpler)
     final int index = calculateIndex(value);
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
@@ -69,11 +80,19 @@ public class MyHashMap<K, V> implements Map<K, V> {
       }
     }
     return false;
+=======
+    //DONE
+    // TODO follow basic approach of remove below (though this will be much simpler) 
+    return (table.contains(value));
+>>>>>>> 88aa1c1fe6298457a05a9c14cdd9b458add3ccf3
   }
+  
 
   @Override
   public V get(final Object key) {
+    //DONE
     // TODO follow basic approach of remove below (though this will be simpler)
+<<<<<<< HEAD
     final int index = calculateIndex(key);
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
     while (iter.hasNext()) {
@@ -82,28 +101,65 @@ public class MyHashMap<K, V> implements Map<K, V> {
         return entry.getValue();
       }
     }
+=======
+    int index = calculateIndex(key);
+    final Iterator<Entry<K,V>> iter = table.get(index).iterator();
+    while(iter.hasNext()){
+      final Entry<K,V> entry = iter.next();
+      if (entry.getKey().equals(key))
+      return entry.getValue();
+    }
+  
+>>>>>>> 88aa1c1fe6298457a05a9c14cdd9b458add3ccf3
     return null;
   }
 
   @Override
   public V put(final K key, final V value) {
     // TODO follow basic approach of remove below (this will be similar)
+<<<<<<< HEAD
    
+=======
+    //DONE
+       int index = calculateIndex(key);
+      if(table.get(index).equals(null))
+      {
+         table.add(index,new LinkedList<>());
+      }
+      final Iterator<Entry<K,V>> iter = table.get(index).iterator();
+      while(iter.hasNext()){
+        final Entry<K,V> entry = iter.next();
+        if(entry.getKey().equals(key))
+        {
+          final V oldValue = entry.getValue();
+          entry.setValue(value);
+          return oldValue;
+        }
+      }
+      return null;
+>>>>>>> 88aa1c1fe6298457a05a9c14cdd9b458add3ccf3
   }
 
   @Override
   public V remove(final Object key) {
+    //calculates index using hashcode % table.length
     final int index = calculateIndex(key);
     final Iterator<Entry<K, V>> iter = table.get(index).iterator();
     while (iter.hasNext()) {
       final Entry<K, V> entry = iter.next();
+      //key is found
       if (entry.getKey().equals(key)) {
         final V oldValue = entry.getValue();
+        //remove value of the key that was found
         iter.remove();
+        //return the value that was removed
         return oldValue;
+        
       }
     }
+    //key is not in table
     return null;
+  
   }
 
   @Override
@@ -116,9 +172,19 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public void clear() {
     // TODO clear each chain
+  
+      final Iterator<Entry<K,V>> iter = table.get(size()).iterator(); 
+      while(iter.hasNext())
+      {
+        
+          final Entry<K,V> ommit = iter.next(); 
+          ommit.getKey(); 
+          remove(ommit);
+      }
+   }
 
 
-  }
+  
 
   /** The resulting keySet is not "backed" by the Map, so we keep it unmodifiable. */
   @Override
@@ -173,3 +239,4 @@ public class MyHashMap<K, V> implements Map<K, V> {
     return Math.floorMod(key.hashCode(), table.size());
   }
 }
+
