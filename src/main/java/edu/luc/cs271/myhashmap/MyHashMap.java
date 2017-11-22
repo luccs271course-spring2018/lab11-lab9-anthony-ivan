@@ -151,10 +151,12 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public void clear() {
     // TODO clear each chain
-    final Iterator<Entry<K,V>> iter = table.get(size()).iterator(); 
-    while(iter.hasNext()) {
-        final Entry<K,V> ommit = iter.next(); 
-        remove(ommit.getKey());
+    for(int i = 0; i < table.size(); i++) {
+      final Iterator<Entry<K, V>> iter = table.get(i).iterator();
+      while (iter.hasNext()) {
+        final Entry<K, V> entry = iter.next();
+        remove(entry.getKey());
+      }
     }
   }
 
