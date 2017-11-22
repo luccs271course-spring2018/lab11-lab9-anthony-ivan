@@ -137,7 +137,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public void putAll(final Map<? extends K, ? extends V> m) {
     // TODO add each entry in m's entrySet
-    for(Entry<? extends K, ? extends V> entry : m.entrySet()) {
+    for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
       put(entry.getKey(), entry.getValue());
     }
   }
@@ -211,7 +211,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
       return false;
     } else {
       // TODO simply compare the entry sets
-      return this.entrySet().equals(that);
+      return this.entrySet() != that;
     }
   }
 
