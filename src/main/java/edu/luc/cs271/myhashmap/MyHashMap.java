@@ -113,8 +113,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
           return oldValue;
         }
       }
-      Entry<K,V> entry;
-      entry = createHashedEntry(key, index, key.hashCode());
+      AbstractMap.SimpleEntry<K,V> entry = new AbstractMap.SimpleEntry<K,V>(key,value);
       table.get(index).add(entry);
       return null;
   }
