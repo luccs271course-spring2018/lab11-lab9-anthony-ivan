@@ -75,17 +75,20 @@ public class MyHashMap<K, V> implements Map<K, V> {
   public V get(final Object key) {
     // TODO follow basic approach of remove below (though this will be simpler)
     final int index = calculateIndex(key);
-    
+    final Iterator<Entry<K, V>> iter = table.get(index).iterator();
+    while (iter.hasNext()) {
+      final Entry<K, V> entry = iter.next();
+      if (entry.getKey().equals(key)) {
+        return entry.getValue();
+      }
+    }
     return null;
   }
 
   @Override
   public V put(final K key, final V value) {
     // TODO follow basic approach of remove below (this will be similar)
-    final int index = calculateIndex(key);
-
-
-    return null;
+   
   }
 
   @Override
