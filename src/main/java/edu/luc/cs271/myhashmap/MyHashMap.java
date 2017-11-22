@@ -92,6 +92,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
           return oldValue;
         }
       }
+
       return null;
   }
 
@@ -172,6 +173,12 @@ public class MyHashMap<K, V> implements Map<K, V> {
   public Set<Entry<K, V>> entrySet() {
     final Set<Entry<K, V>> result = new HashSet<>();
     // TODO populate the set
+    for (int i = 0; i < table.size(); i++) {
+      final Iterator<Entry<K, V>> iter = table.get(i).iterator();
+      while (iter.hasNext()) {
+        result.add(iter.next());
+      }
+    }
 
 
     return Collections.unmodifiableSet(result);
@@ -190,7 +197,8 @@ public class MyHashMap<K, V> implements Map<K, V> {
       return false;
     } else {
       // TODO simply compare the entry sets
-      return false;
+     
+      return this.entrySet() != that;
     }
   }
 
