@@ -67,12 +67,13 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public boolean containsValue(final Object value) {
     // TODO follow basic approach of remove below (though this will be much simpler)
-    final int index = calculateIndex(value);
-    final Iterator<Entry<K, V>> iter = table.get(index).iterator();
-    while (iter.hasNext()) {
-      final Entry<K, V> entry = iter.next();
-      if (entry.getValue().equals(value)) {
-        return true;
+    for(int i = 0; i < table.size(); i++) {
+      final Iterator<Entry<K, V>> iter = table.get(i).iterator();
+      while (iter.hasNext()) {
+        final Entry<K, V> entry = iter.next();
+        if(entry.getValue().equals(value)) {
+          return true;
+        }
       }
     }
     return false;
