@@ -146,8 +146,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
     final Iterator<Entry<K,V>> iter = table.get(size()).iterator(); 
     while(iter.hasNext()) {
         final Entry<K,V> ommit = iter.next(); 
-        key = ommit.getKey(); 
-        remove(key);
+        remove(ommit.getKey());
     }
   }
 
