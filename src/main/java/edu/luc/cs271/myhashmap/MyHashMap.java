@@ -162,7 +162,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   public Set<K> keySet() {
     final Set<K> result = new HashSet<>();
     // TODO populate the set
-    for(int i = 0; i < size(); i++) {
+    for(int i = 0; i < table.size(); i++) {
       final Iterator<Entry<K, V>> iter = table.get(i).iterator();
       while (iter.hasNext()) {
         final Entry<K, V> entry = iter.next();
@@ -176,7 +176,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   @Override
   public Collection<V> values() {
     final List<V> result = new LinkedList<>();
-    for(int i = 0; i < size(); i++) {
+    for(int i = 0; i < table.size(); i++) {
       final Iterator<Entry<K, V>> iter = table.get(i).iterator();
       while (iter.hasNext()) {
         final Entry<K, V> entry = iter.next();
@@ -191,7 +191,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
   public Set<Entry<K, V>> entrySet() {
     final Set<Entry<K, V>> result = new HashSet<>();
     // TODO populate the set
-    for(int i = 0; i < size(); i++) {
+    for(int i = 0; i < table.size(); i++) {
       final Iterator<Entry<K, V>> iter = table.get(i).iterator();
       while (iter.hasNext()) {
         result.add(iter.next());
