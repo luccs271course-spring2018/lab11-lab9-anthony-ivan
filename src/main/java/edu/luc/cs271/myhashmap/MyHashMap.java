@@ -211,7 +211,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
       return false;
     } else {
       // TODO simply compare the entry sets
-      return this.entrySet().equals(that.entrySet());
+      return this.entrySet().equals(that);
     }
   }
 
