@@ -23,7 +23,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
     // allocate a table of the given size
     table = new ArrayList<>(tableSize);
     // then create an empty chain at each position
-    for (int i = 0; i < tableSize; i += 1) {
+    for (int i = 0; i < tableSize; i++) {
       table.add(new LinkedList<>());
     }
   }
@@ -41,7 +41,12 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
   @Override
   public boolean isEmpty() {
-    return size() == 0;
+    if(size() == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   @Override
@@ -94,12 +99,12 @@ public class MyHashMap<K, V> implements Map<K, V> {
     // TODO follow basic approach of remove below (this will be similar)
     //DONE
       int index = calculateIndex(key);
-      if(table.get(index).equals(null))
+      if(table.get(index) == null)
       {
-         table.add(index,new LinkedList<>());
+         table.add(index, new LinkedList<>());
       }
       final Iterator<Entry<K,V>> iter = table.get(index).iterator();
-      while(iter.hasNext()){
+      while(iter.hasNext()) {
         final Entry<K,V> entry = iter.next();
         if(entry.getKey().equals(key))
         {
@@ -108,6 +113,9 @@ public class MyHashMap<K, V> implements Map<K, V> {
           return oldValue;
         }
       }
+      Entry<K,V> entry;
+      entry = createHashedEntry(key, index, key.hashCode());
+      table.get(index).add(entry);
       return null;
   }
 
